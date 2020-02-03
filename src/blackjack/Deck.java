@@ -13,25 +13,37 @@ public class Deck {
 
     private Card[] myCards = new Card[52];
     //needs a constructor to be called - new keyword to initialize here
-    private String[] ranks = {};
-    private String[] suits = {};
+    private String[] ranks = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9",
+          "10", "Jack", "Queen", "King"};
+
+    private String[] suits = {"Clubs", "Diamonds", "Hearts", "Spades"};
     private int nextCard = 0;
 
     public Deck() {
-
+        initDeck();
     }
 
     private void initDeck() {
-
+        int index = 0;
+        //example
+        for (int s = 0; s < suits.length; s++) {
+            for (int r = 0; r < ranks.length; r++) {
+                myCards[index] = new Card(ranks[r], suits[s]);
+                //never need to reference - just asking for index
+                index++;
+            }
+        }
     }
 
     private void shuffle() {
-
     }
 
     //print deck is for testing only - delete me later
     public void printDeck() {
-
+        for (int i = 0; i < myCards.length; i++) {
+            System.out.println(myCards[i].RANK + " of " + myCards[i].SUIT);
+            //card objcts
+        }
     }
 
     public Card dealCard() {
