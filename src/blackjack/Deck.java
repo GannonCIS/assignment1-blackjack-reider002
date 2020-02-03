@@ -21,6 +21,8 @@ public class Deck {
 
     public Deck() {
         initDeck();
+        shuffle();
+        
     }
 
     private void initDeck() {
@@ -36,6 +38,16 @@ public class Deck {
     }
 
     private void shuffle() {
+        for(int i=0;i<myCards.length;i++){
+            Card temp = myCards[i];
+            int rand = (int)(Math.random()*52);
+            myCards[i] = myCards[rand];
+            //here you have 2 copies of a card
+            myCards[rand] = temp;
+            //solves duplicate card
+            
+            
+        }
     }
 
     //print deck is for testing only - delete me later
