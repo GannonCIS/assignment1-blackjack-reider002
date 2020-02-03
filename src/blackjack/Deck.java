@@ -14,7 +14,7 @@ public class Deck {
     private Card[] myCards = new Card[52];
     //needs a constructor to be called - new keyword to initialize here
     private String[] ranks = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9",
-          "10", "Jack", "Queen", "King"};
+        "10", "Jack", "Queen", "King"};
 
     private String[] suits = {"Clubs", "Diamonds", "Hearts", "Spades"};
     private int nextCard = 0;
@@ -22,7 +22,7 @@ public class Deck {
     public Deck() {
         initDeck();
         shuffle();
-        
+
     }
 
     private void initDeck() {
@@ -38,15 +38,14 @@ public class Deck {
     }
 
     private void shuffle() {
-        for(int i=0;i<myCards.length;i++){
+        for (int i = 0; i < myCards.length; i++) {
             Card temp = myCards[i];
-            int rand = (int)(Math.random()*52);
+            int rand = (int) (Math.random() * 52);
             myCards[i] = myCards[rand];
             //here you have 2 copies of a card
             myCards[rand] = temp;
             //solves duplicate card
-            
-            
+
         }
     }
 
@@ -59,7 +58,13 @@ public class Deck {
     }
 
     public Card dealCard() {
-        return null;
+        Card next = myCards[nextCard];
+        nextCard++;
+        if(nextCard>51){
+            shuffle();
+            nextCard=0;
+        }
+        return next;
         //returning null so you don't error - do not forget to change this
     }
 }
