@@ -16,10 +16,18 @@ public class BlackJack {
      */
     public static void main(String[] args) {
         Deck myDeck = new Deck();
-        for(int i=0;i<54;i++){
-           Card temp = myDeck.dealCard();
+        Hand myHand = new Hand();
+        
+        
+        for(int i=0;i<6;i++){
+            myHand.addCard(myDeck.dealCard());
+            
+            System.out.println("numOfCards" + myHand.getNumOfCards() + "|" 
+                    + "score" + myHand.getScore());
+            //i<6 - want to see the error
+           //Card temp = myDeck.dealCard();
            //capturing card it returns (refrence to a card)
-            System.out.println(temp.RANK + " of " + temp.SUIT);
+            //System.out.println(temp.RANK + " of " + temp.SUIT);
         }
     }
     
