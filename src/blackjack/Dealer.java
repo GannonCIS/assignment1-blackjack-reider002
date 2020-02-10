@@ -47,16 +47,16 @@ public class Dealer {
     }
 
     public void takePlayerTurns(Deck deck) {
-        for(Player currPlayer : myPlayers){
-            while(currPlayer.getMyHand().getNumOfCards() < 5 &&
-                    currPlayer.getMyHand().getScore() < 21){
-                    //we have 2 conditions
-                    //"this players turn is oer, time to go to the next player
+        for (Player currPlayer : myPlayers) {
+            while (currPlayer.getMyHand().getNumOfCards() < 5
+                    && currPlayer.getMyHand().getScore() < 21) {
+                //we have 2 conditions
+                //"this players turn is oer, time to go to the next player
                 System.out.println(currPlayer.getName() + " 's Hand");
                 currPlayer.getMyHand().printHand();
                 System.out.println("Wanna hit? (y/n)");
                 char opt = scan.next().charAt(0);
-                if(opt=='y'){
+                if (opt == 'y') {
                     currPlayer.getMyHand().addCard(myDeck.dealCard());
                 }
             }
@@ -66,7 +66,7 @@ public class Dealer {
     }
 
     public void playOutDealerHand() {
-        while(dealerHand.getScore()>16){
+        while (dealerHand.getScore() > 16) {
             dealerHand.addCard(myDeck.dealCard());
         }
         dealerHand.printHand();
@@ -76,11 +76,35 @@ public class Dealer {
     }
 
     public void declareWinner() {
-        //can check if dealer busted?
+        if (dealerHand.getScore() > 21) {
+            System.out.println("Dealer busts!");
+            //for when dealer busts
 
+            if (dealerHand.getScore() == 21 || dealerHand.getNumOfCards() > 4) {
+                System.out.println("Dealer wins");
+            }
+        }
+        for (Player currPlayer : myPlayers) {
+            if (currPlayer.getMyHand().getScore() > 21) {
+                System.out.println(currPlayer + " has busted!");
+            } else if (currPlayer.getMyHand().getNumOfCards() == 5
+                    && (dealerHand.getScore() < 21
+                    || dealerHand.getNumOfCards() < 5)) {
+                System.out.println(currPlayer + " has won!");
+                //when player’s score is < 22 but > the dealers score and
+                //dealer has less than 5 cards
+            } else if (currPlayer.getMyHand().getScore()
+                    == dealerHand.getScore()) {
+                System.out.println("Tie! Dealer Wins!");
+                //in case of tie
+            }
+            if(currPlayer.getMyHand().getScore()<22){
+                System.out.println(currPlayer + "wins!");
+            }
+        }
     }
-
-    //from classwork
+        
+            //from classwork
     private void initMyPlayers(int numOfPlayers) {
 
         myPlayers = new Player[numOfPlayers];
