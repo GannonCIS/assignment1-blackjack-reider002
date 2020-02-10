@@ -25,6 +25,13 @@ public class Dealer {
 
     }
 
+    public void playGame() {
+        dealOpeningHands();
+        takePlayerTurns();
+        playOutDealerHand();
+        declareWinner();
+    }
+
     //my work (assigned homework)
     //private int handValue = 0;
     //private int winner = 0;
@@ -46,18 +53,27 @@ public class Dealer {
 
     }
 
-    public void takePlayerTurns(Deck deck) {
+    public void takePlayerTurns() {
         for (Player currPlayer : myPlayers) {
             while (currPlayer.getMyHand().getNumOfCards() < 5
                     && currPlayer.getMyHand().getScore() < 21) {
                 //we have 2 conditions
                 //"this players turn is oer, time to go to the next player
-                System.out.println(currPlayer.getName() + " 's Hand");
+         
+                System.out.println(currPlayer.getName() + "'s Hand");
                 currPlayer.getMyHand().printHand();
+                System.out.println("Player score: " + currPlayer.getMyHand().getScore());
+                
+                System.out.println("Dealer's hand: ");
+                dealerHand.printHand();
+                System.out.println("Dealer score: " + dealerHand.getScore());
+                
                 System.out.println("Wanna hit? (y/n)");
                 char opt = scan.next().charAt(0);
                 if (opt == 'y') {
                     currPlayer.getMyHand().addCard(myDeck.dealCard());
+                } else {
+                    break;
                 }
             }
             currPlayer.getMyHand().printHand();
@@ -66,7 +82,7 @@ public class Dealer {
     }
 
     public void playOutDealerHand() {
-        while (dealerHand.getScore() > 16) {
+        while (dealerHand.getScore() > 21) {
             dealerHand.addCard(myDeck.dealCard());
         }
         dealerHand.printHand();
@@ -76,7 +92,42 @@ public class Dealer {
     }
 
     public void declareWinner() {
-        if (dealerHand.getScore() > 21) {
+
+        //Lab 2/10/2020
+        System.out.println("Dealer's hand: ");
+        dealerHand.printHand();
+        System.out.println("Dealer score: " + dealerHand.getScore());
+        
+        for (int i = 0; i < myPlayers.length; i++) {
+            Player currPlayer = myPlayers[i];
+            System.out.println(currPlayer.getName() + "'s hand");
+            if (dealerHand.getScore() > 21
+                    || currPlayer.getMyHand().getScore() > 21) {
+                if (currPlayer.getMyHand().getScore() > 21) {
+                    System.out.println(currPlayer.getName() + " you busted");
+                } else {
+                    System.out.println(currPlayer.getName() + " dealer busted!"
+                            + " You win! ");
+                }
+            } else if (dealerHand.getScore() == 21
+                    || dealerHand.getNumOfCards() > 4) {
+                System.out.println(currPlayer.getName() + "you loose");
+
+            } else if (currPlayer.getMyHand().getNumOfCards() > 4) {
+                System.out.println(currPlayer.getName()
+                        + "5 cards under" + " You win");
+            } else if (currPlayer.getMyHand().getScore()
+                    > dealerHand.getScore()) {
+                System.out.println(currPlayer.getName() + " you win");
+            } else {
+                System.out.println(currPlayer.getName()
+                        + "quit now while you can");
+            }
+        }
+    }
+
+    //at home work
+    /* if (dealerHand.getScore() > 21) {
             System.out.println("Dealer busts!");
             //for when dealer busts
 
@@ -100,19 +151,17 @@ public class Dealer {
             }
             if(currPlayer.getMyHand().getScore()<22){
                 System.out.println(currPlayer + "wins!");
-            }
-        }
-    }
-        
-            //from classwork
+            }*/
+//from classwork
     private void initMyPlayers(int numOfPlayers) {
 
         myPlayers = new Player[numOfPlayers];
         for (int i = 0; i < myPlayers.length; i++) {
             //sout + tab gives:
-            System.out.println("Player " + (i + 1) + "what's your name:");
+            System.out.println("Player " + (i + 1) + " what's your name:");
             //don'd want to incatinate with the plus sign, so we put i+1 in ()
             String name = scan.next();
+
             if (name.equals("")) {
                 //just in case player gives an empty string (inputs nothing)
                 myPlayers[i] = new Player(i + 1);

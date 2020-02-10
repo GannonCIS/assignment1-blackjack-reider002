@@ -17,9 +17,15 @@ public class BlackJack {
     public static void main(String[] args) {
         Deck myDeck = new Deck();
         Hand myHand = new Hand();
+        Dealer fred = new Dealer(1);
+        fred.playGame();
+                
         
         
-        for(int i=0;i<6;i++){
+        
+        
+        
+        /*for(int i=0;i<6;i++){
             myHand.addCard(myDeck.dealCard());
             
             System.out.println("numOfCards" + myHand.getNumOfCards() + "|" 
@@ -28,7 +34,7 @@ public class BlackJack {
            //Card temp = myDeck.dealCard();
            //capturing card it returns (refrence to a card)
             //System.out.println(temp.RANK + " of " + temp.SUIT);
-        }
+        }*/
     }
     
 }

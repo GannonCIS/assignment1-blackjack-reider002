@@ -36,9 +36,7 @@ public class Hand {
             myCards[numOfCards] = newCard;
             numOfCards++;
             //going to keep track of score but not "bust" - dealers job
-            try {
-
-                score += Integer.parseInt(newCard.RANK);
+            try{score += Integer.parseInt(newCard.RANK);
                 //just saying "expect this number"
                 //need the exception to do the try-catch
                 //is a primitive typically, but int class will do things
@@ -54,7 +52,7 @@ public class Hand {
     }
 
     public void printHand() {
-        for (int i = 0; i < myCards.length; i++) {
+        for (int i = 0; i < numOfCards; i++) {
             System.out.println(myCards[i].RANK + " of " + myCards[i].SUIT);
             //copied from deck method printDeck
             //player needs to see their hand
